@@ -1,3 +1,9 @@
+credential ->
+user-1 : username: Abigail.Bergnaum@hotmail.com
+password: 1234
+user-2 : username: Terence.Welch@gmail.com
+password: 1234
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
