@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Wrapper from "../Utilities/Wrapper";
 import Product from "./Product";
 import Container from "react-bootstrap/Container";
+//import Pagination from "../Utilities/Pagination";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 

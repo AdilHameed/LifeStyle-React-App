@@ -31,6 +31,7 @@ const Product = (props) => {
               initialValue={props.data.rating}
               size="18"
               readonly="true"
+              fillColor={props.data.rating > 3 ? "#0bb51c" : "#bf1111"}
             />
           </p>
           <p className="text-center">${props.data.price}</p>

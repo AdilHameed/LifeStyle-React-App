@@ -10,12 +10,11 @@ const cartSlice = createSlice({
   initialState: initialCartState,
   reducers: {
     addRemoveItem(state, action) {
-      const newItem = action.payload;
+      const newItem = action.payload.product;
+      const quantity = action.payload.quantity;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       if (!existingItem) {
-        addNewItemToCart(state, newItem);
-      } else {
-        removeExistingItemFromCart(state, existingItem);
+        addNewItemToCart(state, newItem, quantity);
       }
     },
     incrementItem(state, action) {
@@ -36,17 +35,17 @@ const cartSlice = createSlice({
 });
 
 //Required function in cart
-const addNewItemToCart = (state, newItem) => {
+const addNewItemToCart = (state, newItem, quantity) => {
   const currentItemPrice = Number(newItem.price);
   state.items.push({
     id: newItem.id,
     name: newItem.name,
     img: newItem.image_link,
-    quantity: 1,
+    quantity,
     price: currentItemPrice,
-    totalPrice: currentItemPrice,
+    totalPrice: currentItemPrice * quantity,
   });
-  state.totalAmount = state.totalAmount + currentItemPrice;
+  state.totalAmount = state.totalAmount + currentItemPrice * quantity;
   state.totalQuantity = state.totalQuantity + 1;
 };
 
