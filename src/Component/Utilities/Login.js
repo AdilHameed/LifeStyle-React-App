@@ -62,9 +62,9 @@ const Login = () => {
 
   return (
     <>
-      <Row>
-        <Col></Col>
-        <Col xs={6}>
+      <Row className="mb-5">
+        <Col xs={12} sm={3}></Col>
+        <Col xs={12} sm={6}>
           <Container
             style={{
               marginTop: "80px",
@@ -115,7 +115,7 @@ const Login = () => {
             </Form>
           </Container>
         </Col>
-        <Col></Col>
+        <Col xs={12} sm={3}></Col>
       </Row>
     </>
   );

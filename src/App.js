@@ -8,6 +8,8 @@ import ProductList from "./Component/Products/ProductList";
 import ProductDetail from "./Component/Products/ProductDetail";
 import CartList from "./Component/Cart/CartList";
 import NotFound from "./Component/Utilities/NotFound";
+import Footer from "./Component/Utilities/Footer";
+import OrderPlaced from "./Component/Utilities/OrderPlaced";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,11 +38,13 @@ function App() {
             <Route path="/products" element={<ProductList />} />
             <Route path="/products/:productId" element={<ProductDetail />} />
             <Route path="/cart" element={<CartList />} />
+            <Route path="/order" element={<OrderPlaced />} />
           </>
         )}
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </>
   );
 }
