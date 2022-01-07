@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import styles from "../StyleSheet/Common.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -62,16 +63,10 @@ const Login = () => {
 
   return (
     <>
-      <Row className="mb-5">
+      <Row className={styles.pageHeight}>
         <Col xs={12} sm={3}></Col>
         <Col xs={12} sm={6}>
-          <Container
-            style={{
-              marginTop: "80px",
-              border: "2px solid #ede9e8",
-              borderRadius: "5px",
-            }}
-          >
+          <Container className={styles.loginContainer}>
             <h2 className="text-center mt-1">Login</h2>
             <Form className="mt-3 mb-3" onSubmit={handleSubmit}>
               <Form.Group className="mb-3  " controlId="formBasicEmail">
@@ -110,7 +105,7 @@ const Login = () => {
               </Form.Group>
 
               <Button variant="primary" type="submit" disabled={!formIsValid}>
-                Submit
+                Login
               </Button>
             </Form>
           </Container>

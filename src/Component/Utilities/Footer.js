@@ -1,20 +1,17 @@
-import { FaShoppingCart } from "react-icons/fa";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import styles from "../StyleSheet/Common.module.css";
+
 const Footer = () => {
   return (
-    <footer
-      style={{
-        backgroundColor: "rgb(43, 42, 40)",
-        color: "white",
-        height: "40px",
-        marginTop: "175px",
-        left: "0",
-        bottom: "0",
-        width: "100%",
-      }}
-    >
-      <p className="text-center pt-2">
-        Copyright © 2021 by Lifestyle, Inc. All rights reserved.
-      </p>
+    <footer className={styles.footer}>
+      <Row>
+        <Col xs={12}>
+          <p className=" text-center pt-2">
+            Copyright © 2021 by Lifestyle Inc. All rights reserved.
+          </p>
+        </Col>
+      </Row>
     </footer>
   );
 };

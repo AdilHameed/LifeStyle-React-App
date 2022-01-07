@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import Wrapper from "./Wrapper";
+import styles from "../StyleSheet/Common.module.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 const OrderPlaced = () => {
   return (
     <Wrapper>
-      <Row>
+      <Row className={styles.pageHeight}>
         <Col xs={12}>
           <div
             style={{

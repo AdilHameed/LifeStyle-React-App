@@ -1,4 +1,5 @@
 import Button from "react-bootstrap/Button";
+import styles from "../StyleSheet/Common.module.css";
 import { ButtonGroup } from "react-bootstrap";
 import { cartActions } from "../../Redux/Reducer/Cart";
 import { useDispatch } from "react-redux";
@@ -17,7 +18,7 @@ const Cart = (props) => {
   return (
     <div className="card mb-2" style={{ maxWidth: "540" }}>
       <div className="row no-gutters">
-        <div className="col-md-3 mt-2">
+        <div className="col-2 col-sm-3 mt-2">
           <img
             src={props.item.img}
             className="card-img"
@@ -25,12 +26,12 @@ const Cart = (props) => {
             height="90rem"
           />
         </div>
-        <div className="col-md-4">
+        <div className="col-4">
           <div className="card-body">
-            <p className="card-text">{props.item.name}</p>
+            <p className={`card-text ${styles.cartText}`}>{props.item.name}</p>
           </div>
         </div>
-        <div className="col-md-3 mt-4">
+        <div className="col-3 mt-4">
           <ButtonGroup size="sm">
             <Button
               variant="secondary"
@@ -49,7 +50,9 @@ const Cart = (props) => {
             </Button>
           </ButtonGroup>
         </div>
-        <div className="col-md-2 mt-4">${props.item.totalPrice.toFixed(2)}</div>
+        <div className="col-3 col-sm-2 mt-4">
+          ${props.item.totalPrice.toFixed(2)}
+        </div>
       </div>
     </div>
   );

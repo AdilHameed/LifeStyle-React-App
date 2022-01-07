@@ -32,16 +32,25 @@ function App() {
           }
         />
         {!user ? (
-          <Route path="/login" element={<Login />} />
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="/products" element={<Navigate to="/login" />} />
+            <Route
+              path="/products/:productId"
+              element={<Navigate to="/login" />}
+            />
+            <Route path="/cart" element={<Navigate to="/login" />} />
+            <Route path="/order" element={<Navigate to="/login" />} />
+          </>
         ) : (
           <>
             <Route path="/products" element={<ProductList />} />
             <Route path="/products/:productId" element={<ProductDetail />} />
             <Route path="/cart" element={<CartList />} />
             <Route path="/order" element={<OrderPlaced />} />
+            <Route path="/login" element={<Navigate to="/products" />} />
           </>
         )}
-
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

@@ -1,4 +1,5 @@
 import Card from "react-bootstrap/Card";
+import styles from "../StyleSheet/Common.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,14 +18,18 @@ const Product = (props) => {
   return (
     <>
       <Card
-        style={{ width: "17.7rem" }}
-        className={hover && "shadow-lg"}
+        style={{ width: "17.6rem", height: "31rem" }}
+        className={`${hover && "shadow-lg"} ${styles.productCard}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
         <Card.Img variant="top" src={props.data.image_link} height="250rem" />
         <Card.Body>
-          <Card.Text>{props.data.name}</Card.Text>
+          {props.data.name.length > 33 ? (
+            <p>{props.data.name}</p>
+          ) : (
+            <p style={{ marginBottom: "38px" }}>{props.data.name}</p>
+          )}
           <p className="text-center text-muted">{props.data.product_type}</p>
           <p className="text-center">
             <Rating

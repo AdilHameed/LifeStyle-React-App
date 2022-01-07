@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Popup from "reactjs-popup";
+import styles from "../StyleSheet/productDetail.module.css";
 import "reactjs-popup/dist/index.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -13,12 +14,14 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Rating } from "react-simple-star-rating";
 import { cartActions } from "../../Redux/Reducer/Cart";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetail = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState(false);
 
   let product = null;
   //extracting product id from params
@@ -44,38 +47,48 @@ const ProductDetail = () => {
     if (quantity > 0) {
       dispatch(cartActions.addItemToCart({ product, quantity }));
     }
-    setShow(true);
+    setNotification(true);
   };
 
   //function for checking if product is added or not
   const currItem = useSelector((state) =>
     state.cartReducer.items.find((item) => item.id === product.id)
   );
+  let notifyDetail = ``;
   useEffect(() => {
     if (currItem) {
       setQuantity(currItem.quantity);
+      notifyDetail = `${currItem.quantity} x ${currItem.name} is added to cart`;
+    }
+    if (notification) {
+      notify();
     }
   }, [currItem]);
 
   if (!product) {
     return (
       <Wrapper>
-        <h1>No products found</h1>
+        <Container style={{ minHeight: "100vh" }}>
+          <h1 className="text-center mt-5">No products found</h1>
+        </Container>
       </Wrapper>
     );
   }
-
+  const notify = () => toast(notifyDetail);
   return (
     <Wrapper>
-      <Container>
+      <Container style={{ minHeight: "100vh" }}>
         <Row>
-          <Col xs={12} sm={6}>
-            <img src={product.image_link} height="500rem" width="500rem" />
+          <Col xs={12} md={6} lg={6} xl={5}>
+            <img
+              src={product.image_link}
+              className={styles.productDetailsImage}
+            />
           </Col>
-          <Col xs={12} sm={6}>
+          <Col xs={12} md={6} lg={6} xl={7} className={styles.prodDetDisplay}>
             <h2 className="mb-5">{product.name}</h2>
             <Row>
-              <Col xs={6}>
+              <Col xs={12} sm={6}>
                 <Rating
                   initialValue={product.rating}
                   size="25"
@@ -91,10 +104,10 @@ const ProductDetail = () => {
 
             <hr />
             <Row className="mt-4 mb-5">
-              <Col xs={5}>
+              <Col xs={12} sm={5}>
                 <h4 className="ms-2 fw-bold"> ${product.price}</h4>
               </Col>
-              <Col xs={3}>
+              <Col xs={6} sm={3}>
                 <Form.Select
                   size="md"
                   value={quantity}
@@ -122,6 +135,7 @@ const ProductDetail = () => {
                 >
                   {!currItem ? `Add To Cart` : `Added To Cart`}
                 </Button>
+                <ToastContainer />
               </Col>
             </Row>
 
@@ -131,35 +145,6 @@ const ProductDetail = () => {
             </p>
           </Col>
         </Row>
-        <Modal
-          style={{
-            position: "absolute",
-            left: "31%",
-          }}
-          size="sm"
-          show={show}
-          onHide={() => setShow(false)}
-          aria-labelledby="example-modal-sizes-title-sm"
-        >
-          <Modal.Header closeButton>
-            <b style={{ marginLeft: "60px" }}>Item added to cart</b>
-          </Modal.Header>
-          <Modal.Body>
-            <small className="text-center">
-              {currItem &&
-                `${currItem.quantity} x ${currItem.name} added to cart`}
-            </small>
-            <div className="text-center mt-2">
-              <Link
-                className="btn btn-dark btn-sm"
-                to="/cart"
-                onClick={() => setShow(true)}
-              >
-                View Cart
-              </Link>
-            </div>
-          </Modal.Body>
-        </Modal>
       </Container>
     </Wrapper>
   );

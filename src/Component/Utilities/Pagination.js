@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useSelector, useDispatch } from "react-redux";
 import { productActions } from "../../Redux/Reducer/Product";
+import style from "../StyleSheet/Common.module.css";
 
 const Pagination = () => {
   const dispatch = useDispatch();
@@ -22,33 +23,26 @@ const Pagination = () => {
   };
 
   return (
-    <div
-      className="mt-5"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        cursor: "pointer",
-      }}
-    >
+    <div className={`${style.paginationDisplay} mt-5`}>
       <nav>
-        <Row>
-          <ul className="pagination">
+        <ul className="pagination">
+          <Row className={`${style.paginationDisplay}`}>
             {pageNumbers.map((number) => (
-              <Col xs={2} sm={2}>
+              <Col xs={2} sm>
                 <li
                   key={number}
                   className={`page-item ${
                     currentPage === number ? "active" : null
-                  }`}
+                  } `}
                 >
-                  <p onClick={handlePagination} className="page-link me-3">
+                  <p onClick={handlePagination} className="page-link  ">
                     {number}
                   </p>
                 </li>
               </Col>
             ))}
-          </ul>
-        </Row>
+          </Row>
+        </ul>
       </nav>
     </div>
   );

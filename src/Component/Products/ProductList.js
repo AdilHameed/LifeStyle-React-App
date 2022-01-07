@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Pagination from "../Utilities/Pagination";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import styles from "../StyleSheet/Common.module.css";
 
 const ProductList = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -14,11 +15,12 @@ const ProductList = () => {
   const productPerPage = useSelector(
     (state) => state.productReducer.productPerPage
   );
-  console.log(productPerPage[0]);
+
   //getting search text from reducer
   const searchTerm = useSelector((state) => state.searchReducer.search);
 
   //functionality for rendering products data by search text
+
   useEffect(() => {
     if (searchTerm !== "") {
       const searchedProductsList = productPerPage.filter((product) => {
@@ -33,38 +35,26 @@ const ProductList = () => {
     }
   }, [searchTerm, productPerPage]);
 
-  // let productsToRender = [];
-  // if (searchResults.length < 1) {
-  //   productsToRender = productPerPage;
-  // } else {
-  //   productsToRender = searchResults;
-  // }
-  // console.log(productsToRender[0]);
-  console.log(productPerPage[0], "uyi");
   return (
     <>
       <Wrapper>
-        <Container>
+        <Container className={styles.pageHeight}>
           <Row>
-            {searchResults.length < 1
-              ? productPerPage.map((product) => {
-                  return (
-                    <Col xs={12} sm={6} md={3} lg={3} key={product.id}>
-                      <Product data={product} />
-                    </Col>
-                  );
-                })
-              : searchResults.map((product) => {
-                  return (
-                    <Col xs={12} sm={6} md={4} lg={3} key={product.id}>
-                      <Product data={product} />
-                    </Col>
-                  );
-                })}
+            {searchResults.length > 0 ? (
+              searchResults.map((product) => {
+                return (
+                  <Col xs={12} sm={6} md={5} lg={4} xl={3} key={product.id}>
+                    <Product data={product} />
+                  </Col>
+                );
+              })
+            ) : (
+              <h1 className="text-center mt-5">No Products Found</h1>
+            )}
           </Row>
         </Container>
       </Wrapper>
-      <Pagination />
+      {searchTerm === "" && <Pagination />}
     </>
   );
 };

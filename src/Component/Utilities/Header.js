@@ -3,11 +3,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Container from "react-bootstrap/Container";
+import styles from "../StyleSheet/Common.module.css";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { authActions } from "../../Redux/Reducer/Auth";
 import { searchActions } from "../../Redux/Reducer/Search";
 
@@ -40,64 +41,62 @@ const Header = () => {
         >
           <Navbar.Brand style={{ fontSize: "25px" }}>Lifestyle</Navbar.Brand>{" "}
         </NavLink>
-        {user && (
-          <>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                ref={searchValue}
-                onChange={handleSearch}
-                placeholder="Search products"
-                className="me-2"
-                style={{ width: "400px" }}
-                aria-label="Search"
-              />
-              <Button variant="outline-light">Search</Button>
-            </Form>
-            <ul className="navbar-nav ">
-              <li
-                className="nav-item nav-link"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  marginRight: "10px",
-                  cursor: "pointer",
-                }}
-                onClick={() => setShow(true)}
-              >
-                {user1.name.slice(0, 6) + " ..."}
-              </li>
-              <li className="nav-item nav-link">
-                <NavLink
-                  to="/cart"
-                  style={{ color: "white", textDecoration: "none" }}
+        {user && <Navbar.Toggle />}
+        <Navbar.Collapse className="justify-content-end mt-1">
+          {user && (
+            <>
+              <Form className="d-flex" style={{ marginRight: "130px" }}>
+                <Form.Control
+                  type="search"
+                  ref={searchValue}
+                  onChange={handleSearch}
+                  placeholder="Search products"
+                  className={`${styles.searchForm} me-2`}
+                  aria-label="Search"
+                />
+                <Button variant="outline-light">Search</Button>
+              </Form>
+
+              <ul className="navbar-nav ">
+                <li
+                  className={`${styles.headerProfile} nav-item nav-link text-white`}
+                  onClick={() => setShow(true)}
                 >
-                  <FaShoppingCart />
-                  <small
-                    style={{
-                      color: "#dee3e2",
-                    }}
+                  {user1.name.slice(0, 6) + " ..."}
+                </li>
+                <li className="nav-item nav-link">
+                  <NavLink
+                    to="/cart"
+                    style={{ color: "white", textDecoration: "none" }}
                   >
-                    {quantity >= 1 && quantity}
-                  </small>
-                </NavLink>
-              </li>
-              <li className="nav-item nav-link" onClick={handleLogout}>
-                <NavLink
-                  to="/login"
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  Logout
-                </NavLink>
-              </li>
-            </ul>
-          </>
-        )}
+                    <FaShoppingCart />
+                    <small
+                      style={{
+                        color: "#dee3e2",
+                      }}
+                    >
+                      {quantity >= 1 && quantity}
+                    </small>
+                  </NavLink>
+                </li>
+                <li className="nav-item nav-link" onClick={handleLogout}>
+                  <NavLink
+                    to="/login"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    Logout
+                  </NavLink>
+                </li>
+              </ul>
+            </>
+          )}
+        </Navbar.Collapse>
         {user && (
           <Modal
             style={{
               position: "absolute",
-              left: "31%",
+              left: "16%",
+              width: "84%",
             }}
             size="sm"
             show={show}
@@ -121,7 +120,7 @@ const Header = () => {
               >
                 <p>Name : {user1.name}</p>
                 <p>
-                  Email : <small>{user1.username}</small>{" "}
+                  Email : <code className="text-white">{user1.username}</code>
                 </p>
                 <p>Address : {user1.address}</p>
               </div>

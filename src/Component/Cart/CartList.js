@@ -20,9 +20,9 @@ const CartList = () => {
 
   return (
     <Wrapper>
-      <div className="row">
-        <div className="col-xs-12 col-sm-3"></div>
-        <div className="col-xs-12 col-sm-6">
+      <div className="row ms-1" style={{ minHeight: "100vh" }}>
+        <div className="col-xs-12 col-sm-1 col-md-2 col-xl-3"></div>
+        <div className="col-xs-12 col-sm-10 col-md-8 col-xl-6">
           <h2 className="mt-5">Cart</h2>
           <p className="item">{totalQuantity} ITEMS</p>
           {items.length > 0 ? (
@@ -39,18 +39,18 @@ const CartList = () => {
 
           <hr />
           <div className="row">
-            <div className="col-sm-2">
+            <div className="col-2 col-sm-2">
               <b className="pull-right">Subtotal</b>
             </div>
-            <div className="col-sm-8"></div>
-            <div className="col-sm-2">
+            <div className="col-6 col-sm-7 "></div>
+            <div className="col-4 col-sm-3">
               <p>
-                <b className="fw-bold">$</b>
+                <b className="fw-bold ms-4">$</b>
                 <b className="fw-bold "> {totalAmount.toFixed(2)}</b>
               </p>
               {items.length > 0 && (
                 <Link
-                  className="btn btn-primary btn-sm mt-2 mb-5"
+                  className="btn btn-primary btn-sm mt-2 mb-5 ms-1"
                   to="/order"
                   onClick={handleOrder}
                 >
@@ -60,7 +60,7 @@ const CartList = () => {
             </div>
           </div>
         </div>
-        <div className="col-xs-12 col-sm-3"></div>
+        <div className="col-xs-12 col-sm-1 col-md-2 col-xl-3"></div>
       </div>
     </Wrapper>
   );
